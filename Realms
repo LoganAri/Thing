@@ -150,8 +150,6 @@ local ranks = {
     {rank = "Dao Ancestor IX", qi = 14.7e27},
     {rank = "Dao Ancestor X", qi = 41.3e27},
     {rank = "Lesser Divinity I", qi = 58.3e27},
-    {rank = "Dao Ancestor X", qi = 41.3e27},
-    {rank = "Lesser Divinity I", qi = 58.3e27},
     {rank = "Lesser Divinity II", qi = 82.3e27},
     {rank = "Lesser Divinity III", qi = 116.1e27},
     {rank = "Lesser Divinity IV", qi = 163.9e27},
