@@ -1,0 +1,713 @@
+local ranks = {
+  {rank = "Mortal I", qi = 60},
+  {rank = "Mortal II", qi = 85},
+  {rank = "Mortal III", qi = 120},
+  {rank = "Mortal IV", qi = 169},
+  {rank = "Mortal V", qi = 239},
+  {rank = "Mortal VI", qi = 337},
+  {rank = "Mortal VII", qi = 476},
+  {rank = "Mortal VIII", qi = 672},
+  {rank = "Mortal IX", qi = 948},
+  {rank = "Mortal X", qi = 2.7e3},
+  {rank = "Qi Condensation I", qi = 3.8e3},
+  {rank = "Qi Condensation II", qi = 5.4e3},
+  {rank = "Qi Condensation III", qi = 7.6e3},
+  {rank = "Qi Condensation IV", qi = 10.7e3},
+  {rank = "Qi Condensation V", qi = 15.1e3},
+  {rank = "Qi Condensation VI", qi = 21.2e3},
+  {rank = "Qi Condensation VII", qi = 30e3},
+  {rank = "Qi Condensation VIII", qi = 42.3e3},
+  {rank = "Qi Condensation IX", qi = 60e3},
+  {rank = "Qi Condensation X", qi = 168.6e3},
+  {rank = "Foundation Establishment I", qi = 238e3},
+  {rank = "Foundation Establishment II", qi = 336e3},
+  {rank = "Foundation Establishment III", qi = 475e3},
+  {rank = "Foundation Establishment IV", qi = 670e3},
+  {rank = "Foundation Establishment V", qi = 946e3},
+  {rank = "Foundation Establishment VI", qi = 1.34e6},
+  {rank = "Foundation Establishment VII", qi = 1.89e6},
+  {rank = "Foundation Establishment VIII", qi = 2.7e6},
+  {rank = "Foundation Establishment IX", qi = 3.76e6},
+  {rank = "Foundation Establishment X", qi = 10.7e6},
+  {rank = "Core Formation I", qi = 15e6},
+  {rank = "Core Formation II", qi = 22e6},
+  {rank = "Core Formation III", qi = 29.9e6},
+  {rank = "Core Formation IV", qi = 42.2e6},
+  {rank = "Core Formation V", qi = 60e6},
+  {rank = "Core Formation VI", qi = 84.1e6},
+  {rank = "Core Formation VII", qi = 119e6},
+  {rank = "Core Formation VIII", qi = 168e6},
+  {rank = "Core Formation IX", qi = 237e6},
+  {rank = "Core Formation X", qi = 669e6},
+  {rank = "Origin Spirit I", qi = 943.4e6},
+  {rank = "Origin Spirit II", qi = 1.34e9},
+  {rank = "Origin Spirit III", qi = 1.88e9},
+  {rank = "Origin Spirit IV", qi = 2.66e9},
+  {rank = "Origin Spirit V", qi = 3.75e9},
+  {rank = "Origin Spirit VI", qi = 5.3e9},
+  {rank = "Origin Spirit VII", qi = 7.5e9},
+  {rank = "Origin Spirit VIII", qi = 10.6e9},
+  {rank = "Origin Spirit IX", qi = 14.9e9},
+  {rank = "Origin Spirit X", qi = 42.1e9},
+  {rank = "Nascent Soul I", qi = 60e9},
+  {rank = "Nascent Soul II", qi = 84e9},
+  {rank = "Nascent Soul III", qi = 119e9},
+  {rank = "Nascent Soul IV", qi = 168e9},
+  {rank = "Nascent Soul V", qi = 237e9},
+  {rank = "Nascent Soul VI", qi = 334e9},
+  {rank = "Nascent Soul VII", qi = 477e9},
+  {rank = "Nascent Soul VIII", qi = 665e9},
+  {rank = "Nascent Soul IX", qi = 939e9},
+  {rank = "Nascent Soul X", qi = 2.66e12},
+  {rank = "Soul Formation I", qi = 3.8e12},
+  {rank = "Soul Formation II", qi = 5.3e12},
+  {rank = "Soul Formation III", qi = 7.5e12},
+  {rank = "Soul Formation IV", qi = 10.6e12},
+  {rank = "Soul Formation V", qi = 14.9e12},
+  {rank = "Soul Formation VI", qi = 21e12},
+  {rank = "Soul Formation VII", qi = 29.7e12},
+  {rank = "Soul Formation VIII", qi = 41.9e12},
+  {rank = "Soul Formation IX", qi = 59.1e12},
+  {rank = "Soul Formation X", qi = 167e12},
+  {rank = "Soul Transformation I", qi = 235.6e12},
+  {rank = "Soul Transformation II", qi = 332.6e12},
+  {rank = "Soul Transformation III", qi = 469.6e12},
+  {rank = "Soul Transformation IV", qi = 663e12},
+  {rank = "Soul Transformation V", qi = 936.1e12},
+  {rank = "Soul Transformation VI", qi = 1.33e15},
+  {rank = "Soul Transformation VII", qi = 1.87e15},
+  {rank = "Soul Transformation VIII", qi = 2.64e15},
+  {rank = "Soul Transformation IX", qi = 3.73e15},
+  {rank = "Soul Transformation X", qi = 10.51e15},
+  {rank = "Transcendent I", qi = 15e15},
+  {rank = "Transcendent II", qi = 21e15},
+  {rank = "Transcendent III", qi = 29.5e15},
+  {rank = "Transcendent IV", qi = 41.7e15},
+  {rank = "Transcendent V", qi = 59e15},
+  {rank = "Transcendent VI", qi = 83.2e15},
+  {rank = "Transcendent VII", qi = 117.5e15},
+  {rank = "Transcendent VIII", qi = 166e15},
+  {rank = "Transcendent IX", qi = 234.2e15},
+  {rank = "Transcendent X", qi = 661.4e15},
+  {rank = "Loose Immortal I", qi = 934e15},
+  {rank = "Loose Immortal II", qi = 1.32e18},
+  {rank = "Loose Immortal III", qi = 1.87e18},
+  {rank = "Loose Immortal IV", qi = 2.63e18},
+  {rank = "Loose Immortal V", qi = 3.72e18},
+  {rank = "Loose Immortal VI", qi = 5.25e18},
+  {rank = "Loose Immortal VII", qi = 7.4e18},
+  {rank = "Loose Immortal VIII", qi = 10.5e18},
+  {rank = "Loose Immortal IX", qi = 14.8e18},
+  {rank = "Loose Immortal X", qi = 41.7e18},
+  {rank = "True Immortal I", qi = 59e18},
+  {rank = "True Immortal II", qi = 83.1e18},
+  {rank = "True Immortal III", qi = 118e18},
+  {rank = "True Immortal IV", qi = 166e18},
+  {rank = "True Immortal V", qi = 234e18},
+  {rank = "True Immortal VI", qi = 330e18},
+  {rank = "True Immortal VII", qi = 466e18},
+  {rank = "True Immortal VIII", qi = 658e18},
+  {rank = "True Immortal IX", qi = 929e18},
+  {rank = "True Immortal X", qi = 2.63e21},
+  {rank = "Celestial Immortal I", qi = 3.71e21},
+  {rank = "Celestial Immortal II", qi = 5.23e21},
+  {rank = "Celestial Immortal III", qi = 7.4e21},
+  {rank = "Celestial Immortal IV", qi = 10.5e21},
+  {rank = "Celestial Immortal V", qi = 14.8e21},
+  {rank = "Celestial Immortal VI", qi = 20.8e21},
+  {rank = "Celestial Immortal VII", qi = 29.4e21},
+  {rank = "Celestial Immortal VIII", qi = 41.5e21},
+  {rank = "Celestial Immortal IX", qi = 58.5e21},
+  {rank = "Celestial Immortal X", qi = 166e21},
+  {rank = "Chaos Immortal I", qi = 234e21},
+  {rank = "Chaos Immortal II", qi = 330e21},
+  {rank = "Chaos Immortal III", qi = 465e21},
+  {rank = "Chaos Immortal IV", qi = 657e21},
+  {rank = "Chaos Immortal V", qi = 927e21},
+  {rank = "Chaos Immortal VI", qi = 1.31e24},
+  {rank = "Chaos Immortal VII", qi = 1.85e24},
+  {rank = "Chaos Immortal VIII", qi = 2.61e24},
+  {rank = "Chaos Immortal IX", qi = 3.7e24},
+  {rank = "Chaos Immortal X", qi = 10.41e24},
+  {rank = "Dao Sovereign I", qi = 14.7e24},
+  {rank = "Dao Sovereign II", qi = 20.8e24},
+  {rank = "Dao Sovereign III", qi = 29.3e24},
+  {rank = "Dao Sovereign IV", qi = 41.4e24},
+  {rank = "Dao Sovereign V", qi = 58.4e24},
+  {rank = "Dao Sovereign VI", qi = 82.4e24},
+  {rank = "Dao Sovereign VII", qi = 116.4e24},
+  {rank = "Dao Sovereign VIII", qi = 164.3e24},
+  {rank = "Dao Sovereign IX", qi = 232e24},
+  {rank = "Dao Sovereign X", qi = 654.9e24},
+  {rank = "Dao Ancestor I", qi = 924.7e24},
+  {rank = "Dao Ancestor II", qi = 1.31e27},
+  {rank = "Dao Ancestor III", qi = 1.85e27},
+  {rank = "Dao Ancestor IV", qi = 2.61e27},
+  {rank = "Dao Ancestor V", qi = 3.68e27},
+  {rank = "Dao Ancestor VI", qi = 5.2e27},
+  {rank = "Dao Ancestor VII", qi = 7.35e27},
+  {rank = "Dao Ancestor VIII", qi = 10.4e27},
+  {rank = "Dao Ancestor IX", qi = 14.7e27},
+  {rank = "Dao Ancestor X", qi = 41.3e27},
+  {rank = "Lesser Divinity I", qi = 58.3e27},
+  {rank = "Lesser Divinity II", qi = 82.3e27},
+  {rank = "Lesser Divinity III", qi = 116.1e27},
+  {rank = "Lesser Divinity IV", qi = 163.9e27},
+  {rank = "Lesser Divinity V", qi = 231.4e27},
+  {rank = "Lesser Divinity VI", qi = 326.8e27},
+  {rank = "Lesser Divinity VII", qi = 461.3e27},
+  {rank = "Lesser Divinity VIII", qi = 651.4e27},
+  {rank = "Lesser Divinity IX", qi = 919.6e27},
+  {rank = "Lesser Divinity X", qi = 2.6e30},
+  {rank = "Greater Divinity I", qi = 3.7e30},
+  {rank = "Greater Divinity II", qi = 5.2e30},
+  {rank = "Greater Divinity III", qi = 7.4e30},
+  {rank = "Greater Divinity IV", qi = 10.4e30},
+  {rank = "Greater Divinity V", qi = 14.6e30},
+  {rank = "Greater Divinity VI", qi = 20.6e30},
+  {rank = "Greater Divinity VII", qi = 29.1e30},
+  {rank = "Greater Divinity VIII", qi = 41.1e30},
+  {rank = "Greater Divinity IX", qi = 58e30},
+  {rank = "Greater Divinity X", qi = 163.6e30},
+  {rank = "True Divinity I", qi = 231e30},
+  {rank = "True Divinity II", qi = 326e30},
+  {rank = "True Divinity III", qi = 461e30},
+  {rank = "True Divinity IV", qi = 650e30},
+  {rank = "True Divinity V", qi = 918e30},
+  {rank = "True Divinity VI", qi = 1.3e33},
+  {rank = "True Divinity VII", qi = 1.83e33},
+  {rank = "True Divinity VIII", qi = 2.6e33},
+  {rank = "True Divinity IX", qi = 3.65e33},
+  {rank = "True Divinity X", qi = 10.3e33},
+  {rank = "Origin King I", qi = 14.6e33},
+  {rank = "Origin King II", qi = 20.6e33},
+  {rank = "Origin King III", qi = 29e33},
+  {rank = "Origin King IV", qi = 41e33},
+  {rank = "Origin King V", qi = 57.8e33},
+  {rank = "Origin King VI", qi = 81.6e33},
+  {rank = "Origin King VII", qi = 115.2e33},
+  {rank = "Origin King VIII", qi = 162.7e33},
+  {rank = "Origin King IX", qi = 229.7e33},
+  {rank = "Origin King X", qi = 648.4e33},
+  {rank = "Origin God I", qi = 916e33},
+  {rank = "Origin God II", qi = 1.3e36},
+  {rank = "Origin God III", qi = 1.83e36},
+  {rank = "Origin God IV", qi = 2.6e36},
+  {rank = "Origin God V", qi = 3.64e36},
+  {rank = "Origin God VI", qi = 5.14e36},
+  {rank = "Origin God VII", qi = 7.26e36},
+  {rank = "Origin God VIII", qi = 10.25e36},
+  {rank = "Origin God IX", qi = 14.5e36},
+  {rank = "Origin God X", qi = 40.83e36},
+  {rank = "Origin Sovereignity I", qi = 57.65e36},
+  {rank = "Origin Sovereignity II", qi = 81.4e36},
+  {rank = "Origin Sovereignity III", qi = 115e36},
+  {rank = "Origin Sovereignity IV", qi = 162.3e36},
+  {rank = "Origin Sovereignity V", qi = 229.1e36},
+  {rank = "Origin Sovereignity VI", qi = 323.5e36},
+  {rank = "Origin Sovereignity VII", qi = 456.7e36},
+  {rank = "Origin Sovereignity VIII", qi = 645e36},
+  {rank = "Origin Sovereignity IX", qi = 910.5e36},
+  {rank = "Origin Sovereignity X", qi = 2.58e39},
+  {rank = "QuasiTrue God I", qi = 3.65e39},
+  {rank = "QuasiTrue God II", qi = 5.2e39},
+  {rank = "QuasiTrue God III", qi = 7.3e39},
+  {rank = "QuasiTrue God IV", qi = 10.3e39},
+  {rank = "QuasiTrue God V", qi = 14.5e39},
+  {rank = "QuasiTrue God VI", qi = 20.4e39},
+  {rank = "QuasiTrue God VII", qi = 28.8e39},
+  {rank = "QuasiTrue God VIII", qi = 40.7e39},
+  {rank = "QuasiTrue God IX", qi = 57.4e39},
+  {rank = "QuasiTrue God X", qi = 162e39},
+  {rank = "Pure Deity I", qi = 228.6e39},
+  {rank = "Pure Deity II", qi = 322.8e39},
+  {rank = "Pure Deity III", qi = 455.7e39},
+  {rank = "Pure Deity IV", qi = 643.4e39},
+  {rank = "Pure Deity V", qi = 908.4e39},
+  {rank = "Pure Deity VI", qi = 1.29e42},
+  {rank = "Pure Deity VII", qi = 1.82e42},
+  {rank = "Pure Deity VIII", qi = 2.6e42},
+  {rank = "Pure Deity IX", qi = 3.7e42},
+  {rank = "Pure Deity X", qi = 10.2e42},
+  {rank = "QuasiWorld Sovereign I", qi = 14.5e42},
+  {rank = "QuasiWorld Sovereign II", qi = 20.4e42},
+  {rank = "QuasiWorld Sovereign III", qi = 28.8e42},
+  {rank = "QuasiWorld Sovereign IV", qi = 40.6e42},
+  {rank = "QuasiWorld Sovereign V", qi = 57.3e42},
+  {rank = "QuasiWorld Sovereign VI", qi = 80.8e42},
+  {rank = "QuasiWorld Sovereign VII", qi = 114.1e42},
+  {rank = "QuasiWorld Sovereign VIII", qi = 161.1e42},
+  {rank = "QuasiWorld Sovereign IX", qi = 227.4e42},
+  {rank = "QuasiWorld Sovereign X", qi = 642e42},
+  {rank = "World Sovereign I", qi = 906.4e42},
+  {rank = "World Sovereign II", qi = 1.28e45},
+  {rank = "World Sovereign III", qi = 1.81e45},
+  {rank = "World Sovereign IV", qi = 2.57e45},
+  {rank = "World Sovereign V", qi = 3.61e45},
+  {rank = "World Sovereign VI", qi = 5.1e45},
+  {rank = "World Sovereign VII", qi = 7.2e45},
+  {rank = "World Sovereign VIII", qi = 10.2e45},
+  {rank = "World Sovereign IX", qi = 14.4e45},
+  {rank = "World Sovereign X", qi = 40.5e45}
+}
+
+
+-- UI Library
+local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Rain-Design/Libraries/main/Shaman/Library.lua'))()
+local Flags = Library.Flags
+local Window = Library:Window({Text = "Reincarnation "})
+
+
+-- Classes
+local Tab = Window:Tab({Text = "Auto"})
+local Tab2 = Window:Tab({Text = "Misc"})
+
+-- Auto
+local Section = Tab:Section({Text = "Farm"})
+
+Section:Toggle({
+    Text = "Cultivate",
+    Callback = function(Value)
+        cultive = Value
+        cultivate()
+    end
+})
+
+Section:Toggle({
+  Text = "Breaktrough",
+  Callback = function(Value)
+      Breakthrough = Value
+      rankUp()
+  end
+})
+
+Section:Toggle({
+  Text = "Zone",
+  Callback = function(Value)
+    Zone = Value
+    zone()
+  end
+})
+
+Section:Button({
+  Text = "Load The All Map",
+  Tooltip = "USE IT ONLY ONE TIME!",
+  Callback = function(Value)
+    cheackload = Value
+    load()
+  end
+})
+
+Section:Slider({
+  Text = "change rank player",
+  Default = 1,
+  Minimum = 1,
+  Maximum = 181,
+  Flag = "SliderFlag",
+  Callback = function(r)
+      --game.Players.LocalPlayer.stats.Rank.Value = r
+  end
+})
+
+local Section = Tab:Section({Text = "Quest/Npc"})
+
+Section:Toggle({
+  Text = "Auto Qi Release",
+  --Tooltip = "Will Need Skill Qi Release",
+  Callback = function(Value)
+    realeaseQi = Value
+    qirelaese()
+  end
+})
+
+Section:Toggle({
+  Text = "Enable",
+  Callback = function(Value)
+    doNpc = Value
+    farmnpc()
+  end
+  })
+  
+  local dropdown = Section:Dropdown({
+  Text = "Select Npc",
+  Side = "Right",
+  List = {"Sect Elder","Heavenly Cultivators"},
+  Flag = "Choosen",
+  Callback = function(Value)
+    selectQuest = Value
+    --print(selectStats)
+  end
+  })
+
+
+local Section = Tab:Section({Text = "Info"})
+
+Section:Button({
+  Text = "Can i Breaktrough ?",
+  Tooltip = "This will tell you if you can Breaktrough.",
+  Callback = function(Value)
+    canibt = Value
+    canibreakt()
+  end
+})
+
+local Section = Tab:Section({Text = "Auto Dao", Side = "Right"})
+
+Section:Toggle({
+Text = "Enable",
+Callback = function(Value)
+  AutoDaoStats = Value
+  autodao()
+end
+})
+
+local dropdown = Section:Dropdown({
+Text = "Select One",
+Side = "Right",
+List = {"Attack","Defense","Qi"},
+Flag = "Choosen",
+Callback = function(Value)
+  selectStats = Value
+  --print(selectStats)
+end
+})
+
+local Section = Tab:Section({Text = "Single Fruits Farm", Side = "Right"})
+
+Section:Toggle({
+  Text = "Enable",
+  Callback = function(Value)
+      singlefruitsfarm = Value
+      --idk for now
+  end
+})
+
+local dropdown = Section:Dropdown({
+  Text = "Fruits",
+  Side = "Right",
+  List = {"Divine Yin/Divine Yang","Divine Yin","Divine Yang","Insight","Lotus","Ginseng"},
+  Flag = "Choosen",
+  Callback = function(v)
+      warn(v)
+  end
+})
+
+local Section = Tab:Section({Text = "Multi Fruits Farm", Side = "Right"})
+
+Section:Toggle({Text = "Enable",Callback = function(Value)multifruitsfarm = Value --idk for now
+end})
+Section:Toggle({Text = "Divine Yin",Callback = function(Value)multifruitsfarm = Value --idk for now
+end})
+Section:Toggle({Text = "Divine Yang",Callback = function(Value)multifruitsfarm = Value --idk for now
+end})
+Section:Toggle({Text = "Insight",Callback = function(Value)multifruitsfarm = Value --idk for now
+end})
+Section:Toggle({Text = "Lotus",Callback = function(Value)multifruitsfarm = Value --idk for now
+end})
+Section:Toggle({Text = "Ginseng",Callback = function(Value)multifruitsfarm = Value --idk for now
+end})
+
+
+
+-- Variables
+local RS = game:GetService("ReplicatedStorage")
+local LP = game.Players.LocalPlayer
+local PlayerHRP = game.Players.LocalPlayer.Character.HumanoidRootPart
+local vim = game:service'VirtualInputManager'
+local Ts =  game:GetService("TweenService")
+local TsTime = 1 -- Time for the tween to go to
+local currentRank = LP.stats.CultivationRank.Value
+local playerqi = LP.stats.Qi.Value
+
+--Anti Afk
+repeat wait() until game:GetService("Players").LocalPlayer
+local VirtualUser = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+    VirtualUser:CaptureController()
+    VirtualUser:ClickButton2(Vector2.new())
+end)
+
+--Function
+--------------------------------------------------------------------------------------------
+function forcefield()
+  pcall(function()
+  if LP.Character:FindFirstChildOfClass"ForceField" then
+      repeat task.wait() until not
+      LP.Character:FindFirstChildOfClass"ForceField"
+  end
+end)
+end
+--------------------------------------------------------------------------------------------
+function autodao()
+  while AutoDaoStats do
+      repeat task.wait() until game.Players.LocalPlayer.stats.Dao.Value > 0
+      wait(1)
+    if selectStats == "Attack" then
+      game:GetService("ReplicatedStorage")["Stat Remote Events"].AddAttack:FireServer()
+    elseif selectStats == "Defense" then
+      game:GetService("ReplicatedStorage")["Stat Remote Events"].AddDefense:FireServer()
+    elseif selectStats == "Qi" then
+      game:GetService("ReplicatedStorage")["Stat Remote Events"].AddQi:FireServer()
+    end
+    wait(1)
+  end
+end
+--------------------------------------------------------------------------------------------
+function farmnpc()
+  while doNpc == true do
+    if game.Players.LocalPlayer.stats["Has Quest"].Value == false then
+      repeat
+      wait(0.00001)
+      if selectQuest == "Sect Elder" then
+      game:GetService("ReplicatedStorage"):WaitForChild("Quest Remote Events"):WaitForChild("EnableQuest"):FireServer(workspace:WaitForChild("Quest NPCS"):WaitForChild("Elder - Quest (2)"):WaitForChild("HumanoidRootPart"):WaitForChild("QuestActivator"):WaitForChild("Quest"))
+      elseif selectQuest == "Heavenly Cultivators" then
+      game:GetService("ReplicatedStorage"):WaitForChild("Quest Remote Events"):WaitForChild("EnableQuest"):FireServer(workspace:WaitForChild("Quest NPCS"):WaitForChild("Junior  - Quest"):WaitForChild("HumanoidRootPart"):WaitForChild("QuestActivator"):WaitForChild("Quest"))
+    end
+    until game.Players.LocalPlayer.stats["Has Quest"].Value == true
+    
+    wait(0.00001)
+    
+end
+
+wait(0.00001)
+end
+game:GetService("ReplicatedStorage"):WaitForChild("Quest Remote Events"):WaitForChild("LeaveQuest"):FireServer()
+end
+--------------------------------------------------------------------------------------------
+
+local Ms = game:GetService("Workspace").MainSpawn
+function load()
+    pcall(function()
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(420, 96, -94)}):Play()task.wait(1.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(2531, 78, 1655)}):Play()task.wait(2.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(1894, 78, 1971)}):Play()task.wait(2.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(189, 164, 902)}):Play()task.wait(1.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(2511, 208, 3511)}):Play()task.wait(1.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(3200, 74, 3731)}):Play()task.wait(1.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(1377, 78, 4958)}):Play()task.wait(1.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(-318, 74, 3997)}):Play()task.wait(1.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(-1906, 74, 3992)}):Play()task.wait(1.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(-3049, 70, 4453)}):Play()task.wait(1.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(-1378, 142, 586)}):Play()task.wait(1.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(-2702, 130, 1008)}):Play()task.wait(1.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(-2077, 201, -214)}):Play()task.wait(1.5)
+Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = Ms.CFrame}):Play() 
+end)
+end
+--------------------------------------------------------------------------------------------
+local LP = game.Players.LocalPlayer
+local function FireFakeSignal(Button)
+  game:GetService("VirtualInputManager"):SendMouseButtonEvent(Button.AbsolutePosition.X + Button.AbsoluteSize.X / 2, Button.AbsolutePosition.Y + Button.AbsoluteSize.Y / 2 + 30, 0, true, Useless, 1)
+  game:GetService("VirtualInputManager"):SendMouseButtonEvent(Button.AbsolutePosition.X + Button.AbsoluteSize.X / 2, Button.AbsolutePosition.Y + Button.AbsoluteSize.Y / 2 + 30, 0, false, Useless, 1)
+end
+function breaktrough()
+  print("1")
+  LP.PlayerGui.QiGui.Frame.Visible = true
+   task.wait(0.001)
+   FireFakeSignal(LP.PlayerGui.QiGui.Frame.NavFrame.TextButton) task.wait(0.1)
+   FireFakeSignal(LP.PlayerGui.QiGui.Frame.ContentFrame.BreakthroughTab.BreakthoughButton)
+   wait(1)
+end
+--------------------------------------------------------------------------------------------
+function qirelaese()
+  pcall(function()forcefield()end)
+      while realeaseQi == true do
+          if not LP.Character:FindFirstChild("QiReleaseZone") then
+              print("2")
+              repeat
+                  game.Players.LocalPlayer.Backpack["Qi Release"].ReleaseQi:FireServer()
+                  print("3")
+                  task.wait(3)
+              until LP.Character:FindFirstChild("QiReleaseZone")
+              print("4")
+          end
+          wait(1)
+      end
+      print("5")
+      game.Players.LocalPlayer.Backpack["Qi Release"].ReleaseQi:FireServer()
+      wait(1)
+end
+
+--------------------------------------------------------------------------------------------
+function cultivate()
+  pcall(function()forcefield()end)
+  if LP.stats.IsBreakthrough.Value == true then
+      repeat task.wait() until LP.stats.IsBreakthrough.Value == false
+      wait(0.5)
+      return cultivate()
+  else
+      while cultive == true do
+          if LP.stats.IsCultivating.Value == false then
+              print("2")
+              repeat
+                  game:service'VirtualInputManager':SendKeyEvent(false, "C", false, game)
+                  print("3")
+                  task.wait(0.3)
+              until cultive == true or LP.stats.IsBreakthrough.Value == true
+              print("4")
+          end
+          wait(0.001)
+      end
+      print("5")
+      RS:WaitForChild("Qi Remote Events"):WaitForChild("Cultivate"):FireServer(false)
+
+      wait(0.001)
+  end
+end
+--------------------------------------------------------------------------------------------
+function rankUp(playerForce, currentRank)
+  pcall(function() forcefield() end)
+
+  while Breakthrough do
+      if LP.stats.IsBreakthrough == true then
+          repeat task.wait() until LP.stats.IsBreakthrough == false
+      else
+          local currentRank = LP.stats.CultivationRank.Value
+          local playerForce = LP.stats.Qi.Value
+          local rankUpFlag = false
+
+          for i, v in ipairs(ranks) do
+              if v.rank == currentRank and playerForce >= v.qi then
+                  if i + 1 > #ranks then
+                      print("La table des rangs est arrivée au bout. Le joueur a atteint le rang maximum.")
+                      Breakthrough = false
+                      return currentRank
+                  else
+                      print("Peut passer au rang : " .. ranks[i + 1].rank)
+                      wait(1)
+                      pcall(function() breaktrough() end)
+                      rankUpFlag = true
+                      break
+                  end
+              end
+          end
+
+          if not rankUpFlag then
+              print("Pas encore")
+          end
+      end
+      wait(3) -- attendre 3 secondes avant de vérifier à nouveau
+  end
+end
+--------------------------------------------------------------------------------------------
+function canibreakt(playerForce, currentRank)
+  local currentRank = LP.stats.CultivationRank.Value
+  local playerForce = LP.stats.Qi.Value
+  for k, v in ipairs(ranks) do
+      if v.rank == currentRank and playerForce >= v.qi then
+          if k + 1 > #ranks then
+              print("La table des rangs est arrivée au bout. Le joueur a atteint le rang maximum.")
+              return currentRank
+          else
+              print("Peut passer au rang : " .. ranks[k+1].rank)
+              --Breakthrough()
+              return ranks[k+1].rank
+          end
+      end
+  end
+
+  print("Pas encore")
+  return currentRank
+end
+--------------------------------------------------------------------------------------------
+local zones = {
+  {Path = game:GetService("Workspace").Areas["Starter Village"]["Starter Village Houses and stuff"].FountainZone.Zone, RankRequirement = 11, Type = "Part", AdditionalVector = Vector3.new(math.random(-10,10),15,math.random(-10,10)), ZoneRadius = 24},
+  {Path = game:GetService("Workspace").Areas["The yin Yang Tree"].TREEZONE.Zone, RankRequirement = 21, Type = "MeshPart", AdditionalVector = Vector3.new(math.random(30,150),-135,math.random(30,150)), ZoneRadius = 270},
+  {Path = game:GetService("Workspace").Areas["Lawless land"].SilverStatue.Zone, RankRequirement = 41, Type = "Part", AdditionalVector = Vector3.new(math.random(-25,30),35,math.random(-25,30)), ZoneRadius = 70},
+  {Path = game:GetService("Workspace").Areas["Lawless land"].Crystal.Zone, RankRequirement = 51, Type = "Part", AdditionalVector = Vector3.new(math.random(-15,15),24,math.random(-15,15)), ZoneRadius = 80},
+  {Path = game:GetService("Workspace").Areas.Qipelago.Trees.Zone, RankRequirement = 91, Type = "Part", AdditionalVector = Vector3.new(math.random(-55,55),-19,math.random(-55,55)), ZoneRadius = 100},
+  {Path = game:GetService("Workspace").Areas["Sect Land"].Gravity.Zone, RankRequirement = 111, Type = "Part", AdditionalVector = Vector3.new(math.random(-45,45),20,math.random(-45,45)), ZoneRadius = 73},
+  {Path = game:GetService("Workspace").Areas["Lawless land"]["Spirit-Cave"].Zone, RankRequirement = 131, Type = "MeshPart", AdditionalVector = Vector3.new(math.random(-30,30),-1,math.random(-30,30)), ZoneRadius = 45},   
+  {Path = game:GetService("Workspace").Areas["Space-Crack"].Crack.Zone, RankRequirement = 151, Type = "MeshPart", AdditionalVector = Vector3.new(math.random(-15,15),11,math.random(-15,15)), ZoneRadius = 35},
+  {Path = game:GetService("Workspace").Areas["Lawless land"].Seclusion.Zone, RankRequirement = 161, Type = "MeshPart", AdditionalVector = Vector3.new(math.random(-25,15),15,math.random(-25,15)), ZoneRadius = 75},
+  {Path = game:GetService("Workspace").Areas["Lawless land"].Waterfall.Zone, RankRequirement = 181, Type = "MeshPart", AdditionalVector = Vector3.new(math.random(-5,5),15,math.random(-5,5)), ZoneRadius = 50}
+}
+
+Zone = true
+
+local maxZone = nil
+local maxRankRequirement = -1
+local LP = game.Players.LocalPlayer
+
+function makebaseplate()
+  local baseplate = Instance.new("Part")
+baseplate.Name = "ok"
+baseplate.Parent = workspace
+baseplate.Size = Vector3.new(50,1,50) -- change size
+baseplate.Anchored = true
+baseplate.Position = game:GetService("Workspace").Areas["Space-Crack"].Crack.Zone.Position + Vector3.new(0,6,0)
+end
+
+function zone()
+    while Zone == true do
+        local getplayerZoneMilti = LP.stats.ZoneMulti.Value
+        local playerRank = LP.stats.Rank.Value
+
+        if LP.stats.IsBreakthrough.Value == true then
+            repeat task.wait() until LP.stats.IsBreakthrough.Value == false
+            wait(0.5)
+            return zone()
+        else
+            if getplayerZoneMilti == 1 then
+                for i, v in ipairs(zones) do
+                    local qiMulti = v.Path:FindFirstChild("QiMulti")
+                    local rankRequirement = v.RankRequirement
+
+                    if qiMulti and qiMulti:IsA("NumberValue") and rankRequirement <= playerRank then
+                        maxZone = v.Path
+                        maxRankRequirement = rankRequirement
+                    end
+                end
+
+                local qiMulti = maxZone:FindFirstChild("QiMulti")
+                local playerPosition = LP.Character.HumanoidRootPart.Position
+
+                if qiMulti and getplayerZoneMilti ~= qiMulti.Value and maxZone then
+                    local additionalVector = nil
+                    local zoneRadius = nil
+                    for i, v in ipairs(zones) do
+                        if v.Path == maxZone then
+                            additionalVector = v.AdditionalVector
+                            zoneRadius = v.ZoneRadius
+                            break
+                        end
+                    end
+
+                    local targetCFrame = maxZone.CFrame + additionalVector
+                    local distance = (playerPosition - targetCFrame.Position).Magnitude
+
+                    if distance > zoneRadius then
+                        local tweenInfo = TweenInfo.new(TsTime)
+
+                        if maxRankRequirement >= 151 and maxRankRequirement <= 160 then
+                            if not game:GetService("Workspace"):FindFirstChild("ok") then
+                              wait(1)
+                                pcall(function() makebaseplate() end) return zone()
+                            end
+
+                            if game:GetService("Workspace"):FindFirstChild("ok") then
+                                for i, v in ipairs(zones) do
+                                    if v.RankRequirement == 151 then
+                                        additionalVector = v.AdditionalVector
+                                        break
+                                    end
+                                end
+                                targetCFrame = game:GetService("Workspace"):FindFirstChild("ok").CFrame + additionalVector
+                            end
+                        end
+
+                        local tween = Ts:Create(LP.Character.HumanoidRootPart, tweenInfo, {CFrame = targetCFrame})
+                        tween:Play()
+                    else
+                        print("Le joueur est déjà dans la zone")
+                    end
+                else
+                    print("getplayerZoneMilti est égal à qiMulti ou le joueur est déjà dans la zone")
+                end
+            end
+        end
+        wait(1)
+    end
+end
+
+--zone()
