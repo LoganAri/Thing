@@ -457,7 +457,7 @@ function farmnpc()
   while doNpc == true do
     if game.Players.LocalPlayer.stats["Has Quest"].Value == false then
       repeat
-      wait(0.00001)
+      wait(0.1)
       if selectQuest == "Sect Elder" then
       game:GetService("ReplicatedStorage"):WaitForChild("Quest Remote Events"):WaitForChild("EnableQuest"):FireServer(workspace:WaitForChild("Quest NPCS"):WaitForChild("Elder - Quest (2)"):WaitForChild("HumanoidRootPart"):WaitForChild("QuestActivator"):WaitForChild("Quest"))
       elseif selectQuest == "Heavenly Cultivators" then
@@ -465,11 +465,11 @@ function farmnpc()
     end
     until game.Players.LocalPlayer.stats["Has Quest"].Value == true
     
-    wait(0.00001)
+    wait(0.1)
     
 end
 
-wait(0.00001)
+wait(0.1)
 end
 game:GetService("ReplicatedStorage"):WaitForChild("Quest Remote Events"):WaitForChild("LeaveQuest"):FireServer()
 end
