@@ -299,7 +299,7 @@ Section:Button({
 })
 
 Section:Slider({
-  Text = "change rank player",
+  Text = "Test",
   Default = 1,
   Minimum = 1,
   Maximum = 181,
