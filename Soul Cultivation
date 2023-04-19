@@ -251,6 +251,40 @@ local ranks = {
   {rank = "World Sovereign X", qi = 40.5e45}
 }
 
+--Bypass Ui Libbary
+getgenv()["AntiCheatSettings"] = {};
+getgenv()["AntiCheatSettings"]["Adonis"] = true;
+getgenv()["AntiCheatSettings"]["HD Admin"] = true;
+local Settings ={
+["Adonis"] = getgenv()["AntiCheatSettings"]["Adonis"] or false,
+["HD Admin"] = getgenv()["AntiCheatSettings"]["HD Admin"] or false,}
+if Settings["Adonis"] then
+  local GetFullName = game.GetFullName
+  local Hook;
+  Hook = hookfunction(getrenv().require, newcclosure(function(...)
+  local Args = {...}
+  if not checkcaller() then
+      if (GetFullName(getcallingscript()) == ".ClientMover" and Args[1].Name == "Client") then
+        rconsolewarn("Anti-Cheat blocked from running, have fun exploiting with method { Require:Adonis|Client }");
+        return wait(10e1)
+      end
+  end
+  return Hook(unpack(Args))
+  end))
+end
+if Settings["HD Admin"] then
+  local Hook;
+  Hook = hookfunction(getrenv().require, newcclosure(function(...)
+  local Args = {...}
+  if not checkcaller() then
+      if (getcallingscript().Name == "HDAdminStarterPlayer" and Args[1].Name == "MainFramework") then
+        rconsolewarn("Anti-Cheat blocked from running, have fun exploiting with method { Require:HDAdmin|MainFramework }");
+        return wait(10e1)
+      end
+  end
+  return Hook(unpack(Args))
+  end))
+end
 
 -- UI Library
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Rain-Design/Libraries/main/Shaman/Library.lua'))()
@@ -378,7 +412,7 @@ Section:Toggle({
   Text = "Enable",
   Callback = function(Value)
       singlefruitsfarm = Value
-      --idk for now
+      singlefruits()
   end
 })
 
@@ -388,7 +422,7 @@ local dropdown = Section:Dropdown({
   List = {"Divine Yin/Divine Yang","Divine Yin","Divine Yang","Insight","Lotus","Ginseng"},
   Flag = "Choosen",
   Callback = function(v)
-      warn(v)
+      selectSingleFruits = Value
   end
 })
 
@@ -420,12 +454,17 @@ local currentRank = LP.stats.CultivationRank.Value
 local playerqi = LP.stats.Qi.Value
 
 --Anti Afk
-repeat wait() until game:GetService("Players").LocalPlayer
-local VirtualUser = game:GetService("VirtualUser")
-game:GetService("Players").LocalPlayer.Idled:connect(function()
-    VirtualUser:CaptureController()
-    VirtualUser:ClickButton2(Vector2.new())
-end)
+repeat wait() until game:IsLoaded()
+   wait()
+   if getconnections then
+      for _, v in next, getconnections(game:GetService("Players").LocalPlayer.Idled) do v:Disable()
+   end
+end
+if not getconnections then
+   game:GetService("Players").LocalPlayer.Idled:connect(function()
+   game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+   end)
+end
 
 --Function
 --------------------------------------------------------------------------------------------
@@ -457,7 +496,7 @@ function farmnpc()
   while doNpc == true do
     if game.Players.LocalPlayer.stats["Has Quest"].Value == false then
       repeat
-      wait(0.1)
+      wait(0.2)
       if selectQuest == "Sect Elder" then
       game:GetService("ReplicatedStorage"):WaitForChild("Quest Remote Events"):WaitForChild("EnableQuest"):FireServer(workspace:WaitForChild("Quest NPCS"):WaitForChild("Elder - Quest (2)"):WaitForChild("HumanoidRootPart"):WaitForChild("QuestActivator"):WaitForChild("Quest"))
       elseif selectQuest == "Heavenly Cultivators" then
@@ -465,11 +504,10 @@ function farmnpc()
     end
     until game.Players.LocalPlayer.stats["Has Quest"].Value == true
     
-    wait(0.1)
+    wait(0.2)
     
 end
-
-wait(0.1)
+wait(0.2)
 end
 game:GetService("ReplicatedStorage"):WaitForChild("Quest Remote Events"):WaitForChild("LeaveQuest"):FireServer()
 end
@@ -484,6 +522,11 @@ function load()
       Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(189, 164, 902)}):Play()task.wait(1.5)
       Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(2511, 208, 3511)}):Play()task.wait(1.5)
       Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(3200, 74, 3731)}):Play()task.wait(1.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(5424, 70, 5482)}):Play()task.wait(1.5)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(6061, 16, 6119)}):Play()task.wait(1)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(6275, 23, 5860)}):Play()task.wait(1)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(6337, 25, 6432)}):Play()task.wait(1)
+      Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(6084, 23, 6367)}):Play()task.wait(1)
       Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(1377, 78, 4958)}):Play()task.wait(1.5)
       Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(-318, 74, 3997)}):Play()task.wait(1.5)
       Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = CFrame.new(-1906, 74, 3992)}):Play()task.wait(1.5)
@@ -494,6 +537,11 @@ function load()
 Ts:Create(PlayerHRP, TweenInfo.new(TsTime), {CFrame = Ms.CFrame}):Play() 
 end)
 end
+--5424, 70, 5482
+--6061, 16, 6119
+--6275, 23, 5860
+--6337, 25, 6432
+--6084, 23, 6367
 --------------------------------------------------------------------------------------------
 local LP = game.Players.LocalPlayer
 local function FireFakeSignal(Button)
