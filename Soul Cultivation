@@ -607,8 +607,10 @@ function rankUp(playerForce, currentRank)
   pcall(function() forcefield() end)
 
   while Breakthrough do
+    pcall(function()
       if LP.stats.IsBreakthrough == true then
           repeat task.wait() until LP.stats.IsBreakthrough == false
+      
       else
           local currentRank = LP.stats.CultivationRank.Value
           local playerForce = LP.stats.Qi.Value
@@ -635,6 +637,7 @@ function rankUp(playerForce, currentRank)
           end
       end
       wait(3) -- attendre 3 secondes avant de vérifier à nouveau
+  end)
   end
 end
 --------------------------------------------------------------------------------------------
